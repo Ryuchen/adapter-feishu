@@ -15,14 +15,14 @@ jobs:
       group: pull-request-changelog
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Node Environment
         uses: ./.github/actions/setup-node
 
-      - uses: release-drafter/release-drafter@v7
+      - uses: release-drafter/release-drafter@v7.7.0
         id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,7 +53,7 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Python Environment
         uses: ./.github/actions/setup-python
@@ -75,7 +75,7 @@ jobs:
         if: steps.version.outputs.VERSION != steps.version.outputs.TAG_VERSION
         run: exit 1
 
-      - uses: release-drafter/release-drafter@v7
+      - uses: release-drafter/release-drafter@v7.7.0
         with:
           name: Release ${{ steps.version.outputs.TAG_NAME }} 🌈
           tag: ${{ steps.version.outputs.TAG_NAME }}
